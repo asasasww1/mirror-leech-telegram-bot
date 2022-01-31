@@ -51,7 +51,7 @@ def stats(update, context):
             f'<b>ซีพียู:</b> {cpuUsage}%\n'\
             f'<b>แรม:</b> {mem_p}%\n'\
             f'<b>ดิสก์:</b> {disk}%\n\n'\
-            f'<b>ซีพียูคอร์:</b> {p_core}\n'\
+            f'<b>ซีพียูคอร์ที่ใช้:</b> {p_core}\n'\
             f'<b>คอร์ทั้งหมด:</b> {t_core}\n\n'\
             f'<b>พื้นที่สว็อป:</b> {swap_t} | <b>Used:</b> {swap_p}%\n'\
             f'<b>ความจำทั้งหมด:</b> {mem_t}\n'\
@@ -98,7 +98,7 @@ def restart(update, context):
 
 def ping(update, context):
     start_time = int(round(time() * 1000))
-    reply = sendMessage("Starting Ping", context.bot, update)
+    reply = sendMessage("กำลังทดสอบปีงรอสักครู่", context.bot, update)
     end_time = int(round(time() * 1000))
     editMessage(f'{end_time - start_time} ms', reply)
 
@@ -282,7 +282,7 @@ def main():
     dispatcher.add_handler(stats_handler)
     dispatcher.add_handler(log_handler)
     updater.start_polling(drop_pending_updates=IGNORE_PENDING_REQUESTS)
-    LOGGER.info("Bot Started!")
+    LOGGER.info("บอทเริ่มทำงาน!")
     signal.signal(signal.SIGINT, exit_clean_up)
     if rss_session is not None:
         rss_session.start()
