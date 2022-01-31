@@ -46,7 +46,7 @@ class TelegramDownloadHelper:
 
     def __onDownloadProgress(self, current, total):
         if self.__is_cancelled:
-            self.__onDownloadError('Cancelled by user!')
+            self.__onDownloadError('ยกเลิกโดยผู้ใช้!')
             self.__user_bot.stop_transmission()
             return
         with self.__resource_lock:
@@ -81,7 +81,7 @@ class TelegramDownloadHelper:
         if download is not None:
             self.__onDownloadComplete()
         elif not self.__is_cancelled:
-            self.__onDownloadError('Internal error occurred')
+            self.__onDownloadError('เกิดข้อผิดพลาดภายใน')
 
     def add_download(self, message, path, filename):
         _message = self.__user_bot.get_messages(message.chat.id, reply_to_message_ids=message.message_id)
@@ -103,19 +103,19 @@ class TelegramDownloadHelper:
 
             if download:
                 if STOP_DUPLICATE and not self.__listener.isLeech:
-                    LOGGER.info('Checking File/Folder if already in Drive...')
+                    LOGGER.info('กำลังตรวจสอบไฟล์/โฟลเดอร์ถ้ามีอยู่แล้วในไครฟ์...')
                     smsg, button = GoogleDriveHelper().drive_list(name, True, True)
                     if smsg:
-                        msg = "File/Folder is already available in Drive.\nHere are the search results:"
+                        msg = "ไฟล์/โฟลเดอร์มีอยู่แล้วในไดรฟ์.\nนี่คือผลการค้นหา:"
                         return sendMarkup(msg, self.__listener.bot, self.__listener.update, button)
                 self.__onDownloadStart(name, media.file_size, media.file_id)
                 LOGGER.info(f'Downloading Telegram file with id: {media.file_id}')
                 Thread(target=self.__download, args=(_message, path)).start()
             else:
-                self.__onDownloadError('File already being downloaded!')
+                self.__onDownloadError('กำลังดาวน์โหลดไฟล์แล้ว!')
         else:
-            self.__onDownloadError('No document in the replied message')
+            self.__onDownloadError('ไม่มีเอกสารในข้อความตอบกลับ')
 
     def cancel_download(self):
-        LOGGER.info(f'Cancelling download on user request: {self.__id}')
+        LOGGER.info(f'กำลังยกเลิกการดาวน์โหลดตามคำขอของผู้ใช้: {self.__id}')
         self.__is_cancelled = True
