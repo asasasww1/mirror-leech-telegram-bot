@@ -17,21 +17,15 @@ def speedtest(update, context):
     result = test.results.dict()
     path = (result['share'])
     string_speed = f'''
-<b>🖥️ เซิฟ / สถิติของเครื่อง 🖥️</b>
-
-<b>💳 ชื่อ:</b> <code>{result['server']['name']}</code>
-
-<b>⛳️ ประเทศ:</b> <code>{result['server']['country']}, {result['server']['cc']}</code>
+<b>🖥️ Server / Stats of The Machine 🖥️</b>
+<b>💳 Name:</b> <code>{result['server']['name']}</code>
+<b>⛳️ Country:</b> <code>{result['server']['country']}, {result['server']['cc']}</code>
     
-<b>✈️ ข้อมูล ความเร็วเน็ต 💨</b>
-
-<b>🔺 อัพโหลด:</b> <code>{speed_convert(result['upload'] / 8)}</code>
-
-<b>🔻 ดาวน์โหลด:</b>  <code>{speed_convert(result['download'] / 8)}</code>
-
-<b>📶 ปีง:</b> <code>{result['ping']} ms</code>
-
-<b>🏬 ที่อยู่เซิฟเวอร์:</b> <code>{result['client']['isp']}</code>
+<b>✈️ SpeedTest Results 💨</b>
+<b>🔺 Upload:</b> <code>{speed_convert(result['upload'] / 8)}</code>
+<b>🔻 Download:</b>  <code>{speed_convert(result['download'] / 8)}</code>
+<b>📶 Ping:</b> <code>{result['ping']} ms</code>
+<b>🏬 ISP:</b> <code>{result['client']['isp']}</code>
 '''
     ed_msg.delete()
     try:
