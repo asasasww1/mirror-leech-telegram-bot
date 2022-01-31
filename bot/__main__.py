@@ -43,20 +43,20 @@ def stats(update, context):
     mem_t = get_readable_file_size(memory.total)
     mem_a = get_readable_file_size(memory.available)
     mem_u = get_readable_file_size(memory.used)
-    stats = f'<b>Bot Uptime:</b> {currentTime}\n\n'\
-            f'<b>Total Disk Space:</b> {total}\n'\
-            f'<b>Used:</b> {used} | <b>Free:</b> {free}\n\n'\
-            f'<b>Upload:</b> {sent}\n'\
-            f'<b>Download:</b> {recv}\n\n'\
-            f'<b>CPU:</b> {cpuUsage}%\n'\
-            f'<b>RAM:</b> {mem_p}%\n'\
-            f'<b>DISK:</b> {disk}%\n\n'\
-            f'<b>Physical Cores:</b> {p_core}\n'\
-            f'<b>Total Cores:</b> {t_core}\n\n'\
-            f'<b>SWAP:</b> {swap_t} | <b>Used:</b> {swap_p}%\n'\
-            f'<b>Memory Total:</b> {mem_t}\n'\
-            f'<b>Memory Free:</b> {mem_a}\n'\
-            f'<b>Memory Used:</b> {mem_u}\n'
+    stats = f'<b>บอททำงานไป:</b> {currentTime}\n\n'\
+            f'<b>พื้นที่ไดรฟ์:</b> {total}\n'\
+            f'<b>ใช้:</b> {used} | <b>Free:</b> {free}\n\n'\
+            f'<b>อัพโหลด:</b> {sent}\n'\
+            f'<b>ดาวน์โหลด:</b> {recv}\n\n'\
+            f'<b>ซีพียู:</b> {cpuUsage}%\n'\
+            f'<b>แรม:</b> {mem_p}%\n'\
+            f'<b>ดิสก์:</b> {disk}%\n\n'\
+            f'<b>ซีพียูคอร์:</b> {p_core}\n'\
+            f'<b>คอร์ทั้งหมด:</b> {t_core}\n\n'\
+            f'<b>พื้นที่สว็อป:</b> {swap_t} | <b>Used:</b> {swap_p}%\n'\
+            f'<b>ความจำทั้งหมด:</b> {mem_t}\n'\
+            f'<b>ความจำที่เหลือ:</b> {mem_a}\n'\
+            f'<b>ความจำที่ใช้ไป:</b> {mem_u}\n'
     sendMessage(stats, context.bot, update)
 
 
@@ -75,7 +75,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
         sendMarkup('Not Authorized user, deploy your own mirror-leech bot', context.bot, update, reply_markup)
 
 def restart(update, context):
-    restart_message = sendMessage("Restarting...", context.bot, update)
+    restart_message = sendMessage("กำลังรีสตาร์ท...", context.bot, update)
     if Interval:
         Interval[0].cancel()
     alive.kill()
@@ -253,11 +253,11 @@ def main():
     if ospath.isfile(".restartmsg"):
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
-        bot.edit_message_text("Restarted successfully!", chat_id, msg_id)
+        bot.edit_message_text("รีสตาท์สำเร็จ!", chat_id, msg_id)
         osremove(".restartmsg")
     elif OWNER_ID:
         try:
-            text = "<b>Bot Restarted!</b>"
+            text = "<b>บอทเริ่มทำงาน!</b>"
             bot.sendMessage(chat_id=OWNER_ID, text=text, parse_mode=ParseMode.HTML)
             if AUTHORIZED_CHATS:
                 for i in AUTHORIZED_CHATS:
