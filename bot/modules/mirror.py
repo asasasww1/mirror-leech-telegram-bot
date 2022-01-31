@@ -196,11 +196,11 @@ class MirrorListener:
     def onUploadComplete(self, link: str, size, files, folders, typ, name: str):
         if self.isLeech:
             count = len(files)
-            msg = f'<b>Name: </b><code>{name}</code>\n\n'
-            msg += f'<b>Size: </b>{size}\n'
-            msg += f'<b>Total Files: </b>{count}'
+            msg = f'<b>ชื่อ: </b><code>{name}</code>\n\n'
+            msg += f'<b>ขนาด: </b>{size}\n'
+            msg += f'<b>ไฟล์ทั้งหมด: </b>{count}'
             if typ != 0:
-                msg += f'\n<b>Corrupted Files: </b>{typ}'
+                msg += f'\n<b>ไฟล์ที่เสียหาย: </b>{typ}'
             if self.message.chat.type == 'private':
                 sendMessage(msg, self.bot, self.update)
             else:
@@ -229,11 +229,11 @@ class MirrorListener:
             else:
                 update_all_messages()
         else:
-            msg = f'<b>Name: </b><code>{name}</code>\n\n<b>Size: </b>{size}'
-            msg += f'\n\n<b>Type: </b>{typ}'
+            msg = f'<b>ชื่อ: </b><code>{name}</code>\n\n<b>Size: </b>{size}'
+            msg += f'\n\n<b>ประเภท: </b>{typ}'
             if ospath.isdir(f'{DOWNLOAD_DIR}{self.uid}/{name}'):
-                msg += f'\n<b>SubFolders: </b>{folders}'
-                msg += f'\n<b>Files: </b>{files}'
+                msg += f'\n<b>โฟลเดอร์ย่อย: </b>{folders}'
+                msg += f'\n<b>ไฟล์: </b>{files}'
             msg += f'\n\n<b>cc: </b>{self.tag}'
             buttons = ButtonMaker()
             link = short_url(link)
