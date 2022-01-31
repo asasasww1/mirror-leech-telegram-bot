@@ -16,7 +16,7 @@ def cancel_mirror(update, context):
         gid = args[1]
         dl = getDownloadByGid(gid)
         if not dl:
-            sendMessage(f"GID: <code>{gid}</code> Not Found.", context.bot, update)
+            sendMessage(f"GID: <code>{gid}</code> ไม่พบ.", context.bot, update)
             return
         mirror_message = dl.message
     elif update.message.reply_to_message:
@@ -55,7 +55,7 @@ def cancel_all(update, context):
                 sleep(0.3)
         else:
             break
-    sendMessage(f'{count} Download(s) has been Cancelled!', context.bot, update)
+    sendMessage(f'{count} ยกเลิกการดาวน์โหลดแล้ว!', context.bot, update)
 
 
 
