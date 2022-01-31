@@ -17,7 +17,7 @@ def __onDownloadStarted(api, gid):
             dl = getDownloadByGid(gid)
             download = api.get_download(gid)
             if STOP_DUPLICATE and dl is not None and not dl.getListener().isLeech:
-                LOGGER.info('Checking File/Folder if already in Drive...')
+                LOGGER.info('กำลังตรวจสอบไฟล์/โฟลเดอร์ถ้ามีอยู่แล้วในแไดรฟ์...')
                 sname = download.name
                 if dl.getListener().isZip:
                     sname = sname + ".zip"
@@ -29,9 +29,9 @@ def __onDownloadStarted(api, gid):
                 if sname is not None:
                     smsg, button = GoogleDriveHelper().drive_list(sname, True)
                     if smsg:
-                        dl.getListener().onDownloadError('File/Folder already available in Drive.\n\n')
+                        dl.getListener().onDownloadError('ไฟล์/โฟลเดอร์มีอยู่แล้วในไดรฟ์.\n\n')
                         api.remove([download], force=True, files=True)
-                        return sendMarkup("Here are the search results:", dl.getListener().bot, dl.getListener().update, button)
+                        return sendMarkup("นี่คือผลการค้นหา:", dl.getListener().bot, dl.getListener().update, button)
             if dl is not None and (ZIP_UNZIP_LIMIT is not None or TORRENT_DIRECT_LIMIT is not None):
                 sleep(1)
                 limit = None
