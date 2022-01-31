@@ -45,7 +45,7 @@ def stats(update, context):
     mem_u = get_readable_file_size(memory.used)
     stats = f'<b>บอททำงานไป:</b> {currentTime}\n\n'\
             f'<b>พื้นที่ไดรฟ์:</b> {total}\n'\
-            f'<b>ใช้:</b> {used} | <b>Free:</b> {free}\n\n'\
+            f'<b>ใช้:</b> {used} | <b>เหลือ:</b> {free}\n\n'\
             f'<b>อัพโหลด:</b> {sent}\n'\
             f'<b>ดาวน์โหลด:</b> {recv}\n\n'\
             f'<b>ซีพียู:</b> {cpuUsage}%\n'\
@@ -53,7 +53,7 @@ def stats(update, context):
             f'<b>ดิสก์:</b> {disk}%\n\n'\
             f'<b>ซีพียูคอร์ที่ใช้:</b> {p_core}\n'\
             f'<b>คอร์ทั้งหมด:</b> {t_core}\n\n'\
-            f'<b>พื้นที่สว็อป:</b> {swap_t} | <b>Used:</b> {swap_p}%\n'\
+            f'<b>พื้นที่สว็อป:</b> {swap_t} | <b>ใช้ไปแล้ว:</b> {swap_p}%\n'\
             f'<b>ความจำทั้งหมด:</b> {mem_t}\n'\
             f'<b>ความจำที่เหลือ:</b> {mem_a}\n'\
             f'<b>ความจำที่ใช้ไป:</b> {mem_u}\n'
