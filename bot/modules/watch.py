@@ -77,13 +77,13 @@ def _watch(bot, update, isZip=False, isLeech=False, pswd=None, tag=None):
             buttons.sbutton(f"{i}-mp4", f"qu {msg_id} {video_format} t")
             video_format = f"bv*[height<={i}][ext=webm]+ba/b"
             buttons.sbutton(f"{i}-webm", f"qu {msg_id} {video_format} t")
-        buttons.sbutton("Audios", f"qu {msg_id} audio t")
-        buttons.sbutton("Best Videos", f"qu {msg_id} {best_video} t")
-        buttons.sbutton("Best Audios", f"qu {msg_id} {best_audio} t")
-        buttons.sbutton("Cancel", f"qu {msg_id} cancel")
+        buttons.sbutton("เสียง", f"qu {msg_id} audio t")
+        buttons.sbutton("ภาพดีสุด", f"qu {msg_id} {best_video} t")
+        buttons.sbutton("เสียงดีสุด", f"qu {msg_id} {best_audio} t")
+        buttons.sbutton("ยกเลิก", f"qu {msg_id} cancel")
         YTBUTTONS = InlineKeyboardMarkup(buttons.build_menu(3))
         listener_dict[msg_id] = [listener, user_id, link, name, YTBUTTONS]
-        bmsg = sendMarkup('Choose Playlist Videos Quality:', bot, update, YTBUTTONS)
+        bmsg = sendMarkup('เลือกคุณภาพวิดีโอของเพลย์ลิสต์:', bot, update, YTBUTTONS)
     else:
         formats = result.get('formats')
         formats_dict = {}
@@ -126,13 +126,13 @@ def _watch(bot, update, isZip=False, isLeech=False, pswd=None, tag=None):
                     buttons.sbutton(str(buttonName), f"qu {msg_id} {video_format}")
                 else:
                     buttons.sbutton(str(forDict), f"qu {msg_id} dict {forDict}")
-        buttons.sbutton("Audios", f"qu {msg_id} audio")
-        buttons.sbutton("Best Video", f"qu {msg_id} {best_video}")
-        buttons.sbutton("Best Audio", f"qu {msg_id} {best_audio}")
-        buttons.sbutton("Cancel", f"qu {msg_id} cancel")
+        buttons.sbutton("เสียง", f"qu {msg_id} audio")
+        buttons.sbutton("ภาพดีสุด", f"qu {msg_id} {best_video}")
+        buttons.sbutton("เสียงดีสุด", f"qu {msg_id} {best_audio}")
+        buttons.sbutton("ยกเลิก", f"qu {msg_id} cancel")
         YTBUTTONS = InlineKeyboardMarkup(buttons.build_menu(2))
         listener_dict[msg_id] = [listener, user_id, link, name, YTBUTTONS, formats_dict]
-        bmsg = sendMarkup('Choose Video Quality:', bot, update, YTBUTTONS)
+        bmsg = sendMarkup('เลือกคุณภาพวิดีโอของเพลย์ลิสต์:', bot, update, YTBUTTONS)
 
     Thread(target=_auto_cancel, args=(bmsg, msg_id)).start()
 
@@ -161,10 +161,10 @@ def _qual_subbuttons(task_id, qual, msg):
         size = formats_dict[qual][br]
         buttonName = f"{br}K ({get_readable_file_size(size)})"
         buttons.sbutton(str(buttonName), f"qu {task_id} {video_format}")
-    buttons.sbutton("Back", f"qu {task_id} back")
-    buttons.sbutton("Cancel", f"qu {task_id} cancel")
+    buttons.sbutton("กลับ", f"qu {task_id} back")
+    buttons.sbutton("ยกเลิก", f"qu {task_id} cancel")
     SUBBUTTONS = InlineKeyboardMarkup(buttons.build_menu(2))
-    editMessage(f"Choose Video Bitrate for <b>{qual}</b>:", msg, SUBBUTTONS)
+    editMessage(f"เลือกบิตเรตวิดีโอ <b>{qual}</b>:", msg, SUBBUTTONS)
 
 def _audio_subbuttons(task_id, msg, playlist=False):
     buttons = button_build.ButtonMaker()
@@ -177,10 +177,10 @@ def _audio_subbuttons(task_id, msg, playlist=False):
             i = ''
             audio_format = f"ba/b-{q}"
         buttons.sbutton(f"{q}K-mp3", f"qu {task_id} {audio_format}")
-    buttons.sbutton("Back", f"qu {task_id} back")
-    buttons.sbutton("Cancel", f"qu {task_id} cancel")
+    buttons.sbutton("กลับ", f"qu {task_id} back")
+    buttons.sbutton("ยกเลิก", f"qu {task_id} cancel")
     SUBBUTTONS = InlineKeyboardMarkup(buttons.build_menu(2))
-    editMessage(f"Choose Audio{i} Bitrate:", msg, SUBBUTTONS)
+    editMessage(f"เลือกเสียง{i} Bitrate:", msg, SUBBUTTONS)
 
 def select_format(update, context):
     query = update.callback_query
@@ -200,17 +200,17 @@ def select_format(update, context):
         query.answer()
         qual = data[3]
         return _qual_subbuttons(task_id, qual, msg)
-    elif data[2] == "back":
+    elif data[2] == "กลับ":
         query.answer()
-        return editMessage('Choose Video Quality:', msg, task_info[4])
-    elif data[2] == "audio":
+        return editMessage('เลือกคุณภาพวิดีโอ:', msg, task_info[4])
+    elif data[2] == "เสียง":
         query.answer()
         if len(data) == 4:
             playlist = True
         else:
             playlist = False
         return _audio_subbuttons(task_id, msg, playlist)
-    elif data[2] != "cancel":
+    elif data[2] != "ยกเลิก":
         query.answer()
         listener = task_info[0]
         link = task_info[2]
