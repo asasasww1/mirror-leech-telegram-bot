@@ -27,7 +27,7 @@ class _BotCommands:
         self.QbMirrorCommand = 'qbmirror'
         self.QbUnzipMirrorCommand = 'qbunzipmirror'
         self.QbZipMirrorCommand = 'qbzipmirror'
-        self.DeleteCommand = 'ลบ'
+        self.DeleteCommand = 'del'
         self.ShellCommand = 'shell'
         self.ExecHelpCommand = 'exechelp'
         self.LeechSetCommand = 'leechset'
