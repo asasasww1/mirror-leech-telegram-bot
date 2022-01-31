@@ -186,7 +186,7 @@ class MirrorListener:
             except Exception as e:
                 LOGGER.error(str(e))
             count = len(download_dict)
-        msg = f"{self.tag} your download has been stopped due to: {error}"
+        msg = f"{self.tag} การดาวน์โหลดของคุณหยุดลงเนื่องจาก: {error}"
         sendMessage(msg, self.bot, self.update)
         if count == 0:
             self.clean()
@@ -205,7 +205,7 @@ class MirrorListener:
                 sendMessage(msg, self.bot, self.update)
             else:
                 chat_id = str(self.message.chat.id)[4:]
-                msg += f'\n<b>cc: </b>{self.tag}\n\n'
+                msg += f'\n<b>คุณ: </b>{self.tag}\n\n'
                 fmsg = ''
                 for index, item in enumerate(list(files), start=1):
                     msg_id = files[item]
@@ -229,7 +229,7 @@ class MirrorListener:
             else:
                 update_all_messages()
         else:
-            msg = f'<b>ชื่อ: </b><code>{name}</code>\n\n<b>Size: </b>{size}'
+            msg = f'<b>ชื่อ: </b><code>{name}</code>\n\n<b>ขนาด: </b>{size}'
             msg += f'\n\n<b>ประเภท: </b>{typ}'
             if ospath.isdir(f'{DOWNLOAD_DIR}{self.uid}/{name}'):
                 msg += f'\n<b>โฟลเดอร์ย่อย: </b>{folders}'
